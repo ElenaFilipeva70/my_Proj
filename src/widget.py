@@ -15,3 +15,9 @@ def mask_account_card(account_card: str) -> str:
     else:
         account_card = get_mask_card_number(card_schet)
     return card_name + " " + account_card
+
+
+def get_date(string_date: str) -> str:
+    """Функция возвращает строку с датой в формате ДД.ММ.ГГГГ"""
+    new_string_date = string_date[8:10] + "." + string_date[5:7] + "." + string_date[0:4]
+    return new_string_date
