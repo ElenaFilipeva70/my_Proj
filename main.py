@@ -1,4 +1,4 @@
-from src.processing import filter_by_state
+from src.processing import filter_by_state, sort_by_date
 from src.widget import get_date, mask_account_card
 
 # print("Ведите номер карты")
@@ -23,3 +23,7 @@ bank_operation = [
 print(filter_by_state(bank_operation))
 state = "CANCELED"
 print(filter_by_state(bank_operation, state))
+
+print(sort_by_date(bank_operation))
+sort_order = False
+print(sort_by_date(bank_operation, sort_order))
