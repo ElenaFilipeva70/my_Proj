@@ -14,16 +14,16 @@ print(num_check_mask)
 new_string_date = get_date("2024-03-11T02:26:18.671407")
 print("Дата ", new_string_date)
 
-bank_operation = [
+dictionary_operation = [
     {"id": 41428829, "state": "EXECUTED", "date": "2019-07-03T18:35:29.512364"},
     {"id": 939719570, "state": "EXECUTED", "date": "2018-06-30T02:08:58.425572"},
     {"id": 594226727, "state": "CANCELED", "date": "2018-09-12T21:27:25.241689"},
     {"id": 615064591, "state": "CANCELED", "date": "2018-10-14T08:21:33.419441"},
 ]
-print(filter_by_state(bank_operation))
+print(filter_by_state(dictionary_operation))
 state = "CANCELED"
-print(filter_by_state(bank_operation, state))
+print(filter_by_state(dictionary_operation, state))
 
-print(sort_by_date(bank_operation))
-sort_order = False
-print(sort_by_date(bank_operation, sort_order))
+print(sort_by_date(dictionary_operation))
+revers = False
+print(sort_by_date(dictionary_operation, revers))
