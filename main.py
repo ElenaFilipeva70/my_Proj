@@ -11,6 +11,7 @@ num_check = "Счет 73654108430135874305"
 num_check_mask = mask_account_card(num_check)
 print(num_check_mask)
 
+
 new_string_date = get_date("2024-03-11T02:26:18.671407")
 print("Дата ", new_string_date)
 
