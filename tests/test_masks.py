@@ -16,6 +16,7 @@ from src.masks import get_mask_account, get_mask_card_number
 def test_get_mask_account(num_check, expected):
     assert get_mask_account(num_check) == expected
 
+
 @pytest.mark.parametrize("card_number, expected", [("7000792289606361", "7000 79** **** 6361"),
                                                  (7000792289606361, "7000 79** **** 6361"),
                                                  ("7000 7922 8960 6361", "7000 79** **** 6361"),
