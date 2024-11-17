@@ -1,4 +1,6 @@
 from typing import Any, Dict, List
+from src.widget import get_date
+from tomlkit import string
 
 
 def filter_by_state(dictionary_operation: List[Dict[str, Any]], state: str = "EXECUTED") -> List[Dict[str, Any]]:
@@ -14,5 +16,11 @@ def filter_by_state(dictionary_operation: List[Dict[str, Any]], state: str = "EX
 def sort_by_date(dictionary_operation: List[Dict[str, Any]], revers: bool = True) -> List[Dict[str, Any]]:
     """Функция принимает на вход список словарей и параметр порядка сортировки, возвращает новый список,
     в котором исходные словари отсортированы по дате."""
-    result_dictionary = sorted(dictionary_operation, key=lambda x: x["date"], reverse=revers)
+    string_date = ""
+    new_dictionary_operation = []
+    for operation in dictionary_operation:
+        string_date = get_date(operation.get("date"))
+        if  string_date != "Неверный формат данных":
+            new_dictionary_operation.append(operation)
+    result_dictionary = sorted(new_dictionary_operation, key=lambda x: x["date"], reverse=revers)
     return result_dictionary
