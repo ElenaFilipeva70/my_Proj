@@ -6,7 +6,9 @@ def get_mask_card_number(card_number: Union[str | int]) -> str:
     card_number = str(card_number)
     new_card_number = card_number.replace(" ", "")
     if new_card_number.isdigit() and len(new_card_number) == 16:
-        card_number_mask = new_card_number[0:4] + " " + new_card_number[4:6] + "**" + " " + "****" + " " + new_card_number[-4:]
+        card_number_mask = (
+            new_card_number[0:4] + " " + new_card_number[4:6] + "**" + " " + "****" + " " + new_card_number[-4:]
+        )
         return card_number_mask
     else:
         return "Неверный формат номера карты"
