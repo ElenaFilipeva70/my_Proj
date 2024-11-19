@@ -24,11 +24,11 @@ from src.widget import get_date, mask_account_card
         ("Visa Gold - 5999414228426353", "Visa Gold 5999 41** **** 6353"),
     ],
 )
-def test_mask_account_card(account_card, expected):
+def test_mask_account_card(account_card: str, expected: str) -> None:
     assert mask_account_card(account_card) == expected
 
 
-def test_get_date(date_string):
+def test_get_date(date_string: str) -> None:
     assert get_date(date_string) == "11.03.2024"
 
 
@@ -46,5 +46,5 @@ def test_get_date(date_string):
         ("11 of February 2024T02:26:18.671407", "Неверный формат данных"),
     ],
 )
-def test_get_date_invalid(string_date, expected):
+def test_get_date_invalid(string_date: str, expected: str) -> None:
     assert get_date(string_date) == expected

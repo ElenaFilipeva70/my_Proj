@@ -1,3 +1,5 @@
+from typing import Union
+
 import pytest
 
 from src.masks import get_mask_account, get_mask_card_number
@@ -18,7 +20,7 @@ from src.masks import get_mask_account, get_mask_card_number
         (7365410830135874305, "Неверный формат номера счета"),
     ],
 )
-def test_get_mask_account(num_check, expected):
+def test_get_mask_account(num_check: Union[str | int], expected: str) -> None:
     assert get_mask_account(num_check) == expected
 
 
@@ -37,5 +39,5 @@ def test_get_mask_account(num_check, expected):
         (700792289606361, "Неверный формат номера карты"),
     ],
 )
-def test_get_mask_card_number(card_number, expected):
+def test_get_mask_card_number(card_number: Union[str | int], expected: str) -> None:
     assert get_mask_card_number(card_number) == expected
