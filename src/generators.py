@@ -60,13 +60,13 @@ def filter_by_currency(transactions_list: List[Dict[str, Any]], currency: str) -
                 yield transaction
 
 
-if __name__ == "__main__":
-    usd_transactions = filter_by_currency(transactions, "USD")
-    try:
-        for _ in range(3):
-            print(next(usd_transactions))
-    except StopIteration:
-        print("Нет операций в заданной валюте")
+# if __name__ == "__main__":
+#     usd_transactions = filter_by_currency(transactions, "USD")
+#     try:
+#         for _ in range(3):
+#             print(next(usd_transactions))
+#     except StopIteration:
+#         print("Нет операций в заданной валюте")
 
 
 def transaction_descriptions(transactions_list: List[Dict[str, Any]]) -> Any:
@@ -78,13 +78,13 @@ def transaction_descriptions(transactions_list: List[Dict[str, Any]]) -> Any:
             yield name_operation
 
 
-if __name__ == "__main__":
-    descriptions = transaction_descriptions(transactions)
-    try:
-        for _ in range(5):
-            print(next(descriptions))
-    except StopIteration:
-        print("Конец операций")
+# if __name__ == "__main__":
+#     descriptions = transaction_descriptions(transactions)
+#     try:
+#         for _ in range(5):
+#             print(next(descriptions))
+#     except StopIteration:
+#         print("Конец операций")
 
 
 def card_number_generator(start: int, stop: int) -> Any:
@@ -97,5 +97,5 @@ def card_number_generator(start: int, stop: int) -> Any:
             yield " ".join(number_card)
 
 
-for card_number in card_number_generator(1, 5):
-    print(card_number)
+# for card_number in card_number_generator(1, 5):
+#     print(card_number)
