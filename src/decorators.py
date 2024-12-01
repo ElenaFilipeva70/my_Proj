@@ -15,9 +15,11 @@ def log(filename: Optional[str] = None) -> Callable:
                 start_time = time()
                 result = func(*args, **kwargs)
                 end_time = time()
+
                 if filename is not None:
                     with open(filename, "w", encoding="utf-8") as file:
                         file.write(f"Функция: {func.__name__}, результат: {result}, ок\n")
+                        print(f"Время работы функции: {end_time - start_time:.6f}")
                 else:
                     print(f"Функция: {func.__name__}, результат: {result}, ок")
                 return result
@@ -38,4 +40,4 @@ def my_function(x: int | float, y: int | float) -> int | float:
     return x + y
 
 
-# my_function("71.02", 29.036)
+# my_function(71.02, 29.036)
