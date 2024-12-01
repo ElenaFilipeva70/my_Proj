@@ -1,4 +1,4 @@
-from src.decorators import log, my_function
+from src.decorators import log
 
 
 @log("logs/mylog.txt")
