@@ -1,4 +1,3 @@
-from collections.abc import Iterator
 from typing import Any, Dict, List
 
 transactions = [
@@ -93,7 +92,7 @@ def card_number_generator(start: int, stop: int) -> Any:
     else:
         for i in range(start, stop + 1):
             card_number_code = "0" * (16 - len(str(i))) + str(i)
-            number_card = list(card_number_code[x * 4 : (x + 1) * 4] for x in range(4))
+            number_card = list(card_number_code[x * 4: (x + 1) * 4] for x in range(4))
             yield " ".join(number_card)
 
 
