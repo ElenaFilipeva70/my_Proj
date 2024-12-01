@@ -17,7 +17,7 @@ def mask_account_card(account_card: str) -> str:
     else:
         account_card = get_mask_card_number(card_schet)
     if card_name[-2] == " ":
-        new_card_name = card_name[0: len(card_name) - 1]
+        new_card_name = card_name[0 : len(card_name) - 1]
         return new_card_name + account_card
     if card_name[-1] == " ":
         return card_name + account_card
