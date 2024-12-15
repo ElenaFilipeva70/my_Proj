@@ -1,50 +1,46 @@
 import os
-from dotenv import load_dotenv
-import requests
 from typing import Any
 
+import requests
+from dotenv import load_dotenv
 
 # Загрузка переменных из .env-файла
 load_dotenv()
-API_KEY = os.getenv('API_KEY')
-Base_URL = os.getenv('Base_URL')
-# print(API_KEY)
-# print(Base_URL)
+API_KEY = os.getenv("API_KEY")
+Base_URL = os.getenv("Base_URL")
+print(API_KEY)
+print(Base_URL)
 
 
-def conversions_get(transactions_list: dict[Any]) -> float:
-    """ Функция, которая принимает на вход транзакцию и возвращает сумму транзакции в рублях """
+def conversions_get(transactions_list: dict[str, Any]) -> float | None:
+    """Функция, которая принимает на вход транзакцию и возвращает сумму транзакции в рублях"""
     try:
         amount = float(transactions_list["operationAmount"]["amount"])
-        cyrrency_code = transactions_list["operationAmount"]["currency"]["code"]
-        if cyrrency_code != "RUB":
-            url = Base_URL
-            payload = {
-                "amount": amount,
-                "from": cyrrency_code,
-                "to": "RUB"
-            }
-            headers = {"apikey": API_KEY}
-            response = requests.get( url, headers=headers, params=payload)
-            status_code = response.status_code
-            print(status_code)
-            result = response.json()
-            amount = result["result"]
-        print(amount)
-        return amount
-    except Exception as e:
-        print(type(e).__name__)
+        currency_code = transactions_list["operationAmount"]["currency"]["code"]
+        if currency_code == "RUB":
+            result_amount = round(amount, 4)
+            return result_amount
+        else:
+            api_convert = get_convert_info(amount, currency_code)
+            if api_convert != {}:
+                result_amount = round(api_convert.get("result"), 4)
+                return result_amount
+    except requests.exceptions.RequestException:
+        print("An error occurred. Please try again later.")
+        return None
 
 
-
-# {'success': True, 'query': {'from': 'USD', 'to': 'RUB', 'amount': 8221.37}, 'info': {'timestamp': 1733551503, 'rate': 100.475628}, 'date': '2024-12-07', 'result': 826047.31377}
-# 200
-# {'success': True, 'query': {'from': 'USD', 'to': 'RUB', 'amount': 9824.07}, 'info': {'timestamp': 1733551503, 'rate': 100.475628}, 'date': '2024-12-07', 'result': 987079.602766}
-# 200
-# {'success': True, 'query': {'from': 'USD', 'to': 'RUB', 'amount': 79114.93}, 'info': {'timestamp': 1733551503, 'rate': 100.475628}, 'date': '2024-12-07', 'result': 7949122.275926}
-# 200
-# {'success': True, 'query': {'from': 'USD', 'to': 'RUB', 'amount': 70946.18}, 'info': {'timestamp': 1733551503, 'rate': 100.475628}, 'date': '2024-12-07', 'result': 7128361.989701}
-# 200
-# {'success': True, 'query': {'from': 'USD', 'to': 'RUB', 'amount': 51463.7}, 'info': {'timestamp': 1733551503, 'rate': 100.475628}, 'date': '2024-12-07', 'result': 5170847.576704}
-# 200
-# {'success': True, 'query': {'from': 'USD', 'to': 'RUB', 'amount': 56883.54}, 'info': {'timestamp': 1733551503, 'rate': 100.475628}, 'date': '2024-12-07', 'result': 5715409.404363}
+def get_convert_info(amount: float, currency: str) -> dict[str, Any]:
+    """Функция выполняет обращение к внешнему API для получения текущего курса валют
+    и конвертации суммы операции в рубли."""
+    url = Base_URL
+    payload = {"amount": amount, "from": currency, "to": "RUB"}
+    headers = {"apikey": API_KEY}
+    response = requests.get(url, headers=headers, params=payload)
+    status_code = response.status_code
+    if status_code == 200:
+        result = response.json()
+        return dict(result)
+    else:
+        print(f"Запрос завершился ошибкой: {response.reason}")
+        return {}
