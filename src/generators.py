@@ -50,7 +50,7 @@ transactions = [
 
 
 def filter_by_currency(transactions_list: List[Dict[str, Any]], currency: str) -> Any:
-    """Функция возвращает транзакции по заданному значению валюты"""
+    """Генератор, который возвращает транзакции по заданному значению валюты"""
     if transactions_list == []:
         yield "Нет данных для анализа"
     else:
@@ -69,6 +69,7 @@ def filter_by_currency(transactions_list: List[Dict[str, Any]], currency: str) -
 
 
 def transaction_descriptions(transactions_list: List[Dict[str, Any]]) -> Any:
+    """Генератор, который принимает список словарей с транзакциями и возвращает описание каждой операции по очереди"""
     if transactions_list == []:
         yield "Нет данных для анализа"
     else:
@@ -87,6 +88,7 @@ def transaction_descriptions(transactions_list: List[Dict[str, Any]]) -> Any:
 
 
 def card_number_generator(start: int, stop: int) -> Any:
+    """Генератор, который выдает номера банковских карт в формате XXXX XXXX XXXX XXXX, где X — цифра номера карты"""
     if len(str(start)) > 16 or len(str(stop)) > 16 or start > stop:
         yield ""
     else:
