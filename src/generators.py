@@ -55,8 +55,13 @@ def filter_by_currency(transactions_list: List[Dict[str, Any]], currency: str) -
         yield "Нет данных для анализа"
     else:
         for transaction in transactions_list:
-            if transaction["operationAmount"]["currency"]["code"] == currency:
-                yield transaction
+            currency_list = transaction.get("currency_code", "")
+            if currency_list != "":
+                if transaction["currency_code"] == currency:
+                    yield transaction
+            else:
+                if transaction["operationAmount"]["currency"]["code"] == currency:
+                    yield transaction
 
 
 # if __name__ == "__main__":
@@ -97,6 +102,5 @@ def card_number_generator(start: int, stop: int) -> Any:
             number_card = list(card_number_code[x * 4: (x + 1) * 4] for x in range(4))
             yield " ".join(number_card)
 
-
 # for card_number in card_number_generator(1, 5):
-#     print(card_number)
+# print(card_number)

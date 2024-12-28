@@ -1,9 +1,13 @@
+import os
 import logging
 from typing import Union
 
+base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+path_file = os.path.join(base_dir, "logs", "masks.log")
+
 logging.basicConfig(
     level=logging.DEBUG,
-    filename="logs/masks.log",
+    filename=path_file,
     filemode="w",
     format="%(asctime)s %(name)s %(levelname)s: %(message)s",
     datefmt="%Y-%m-%d %H:%M:%S",
@@ -55,7 +59,6 @@ def get_mask_account(num_check: Union[str | int]) -> str:
         return f"Возникла ошибка {e}"
     finally:
         account_logger.info("Функция маскировки номера банковского счета завершила работ")
-
 
 # card_number = 7000792289606361
 # mask_card_number = get_mask_card_number(card_number)

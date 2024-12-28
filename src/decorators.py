@@ -1,3 +1,4 @@
+import os
 from collections.abc import Callable
 from functools import wraps
 from time import time
@@ -35,9 +36,12 @@ def log(filename: Optional[str] = None) -> Callable:
     return my_decorator
 
 
-@log(filename="../logs/mylog.txt")
+base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+path_file = os.path.join(base_dir, "logs", "mylog.txt")
+
+
+@log(filename=path_file)
 def my_function(x: int | float, y: int | float) -> int | float:
     return x + y
-
 
 # my_function(71.02, 29.036)

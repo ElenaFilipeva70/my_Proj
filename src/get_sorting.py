@@ -1,4 +1,5 @@
 import re
+from collections import Counter
 from typing import Any, Dict, List
 
 
@@ -8,7 +9,7 @@ transactions = [
         "state": "EXECUTED",
         "date": "2018-06-30T02:08:58.425572",
         "operationAmount": {"amount": "9824.07", "currency": {"name": "USD", "code": "USD"}},
-        "description": "Перевод организации",
+        "description": "Оплата организации",
         "from": "Счет 75106830613657916952",
         "to": "Счет 11776614605963066702",
     },
@@ -17,7 +18,7 @@ transactions = [
         "state": "EXECUTED",
         "date": "2019-04-04T23:20:05.206878",
         "operationAmount": {"amount": "79114.93", "currency": {"name": "USD", "code": "USD"}},
-        "description": "Перевод со счета на счет",
+        "description": "Открытие счета",
         "from": "Счет 19708645243227258542",
         "to": "Счет 75651667383060284188",
     },
@@ -50,36 +51,48 @@ transactions = [
     },
 ]
 
-def filter_transactions(transactions: List[Dict[str, Any]], search_string: str) -> List[Dict[str, Any]]:
+
+def filter_transactions(transactions: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     """Функцию принимает список словарей с данными о банковских операциях и строку поиска
-     и возвращает список словарей,у которых в описании есть данная строка"""
+     и возвращает список словарей, у которых в описании есть данная строка"""
+    try:
+        print("Введите слово, по которому будем фильтровать")
+        search_string = str(input().lower())
+        pattern = re.compile(re.escape(search_string), flags=re.IGNORECASE)
+        filtered_transactions = [
+            transaction for transaction in transactions
+            if 'description' in transaction and pattern.search(transaction['description'])
+        ]
+        # if len(filtered_transactions) == 0:
+        #     print("Нет операций с заданным описанием")
+        return filtered_transactions
+    except Exception as e:
+        print(type(e).__name__)
+        return []
 
-    pattern = re.compile(search_string, flags=re.IGNORECASE)
-    filtered_transactions = [
-        transaction for transaction in transactions
-        if 'description' in transaction and pattern.search(transaction['description'])
-    ]
-
-    return filtered_transactions
-
-result = filter_transactions(transactions, 'ПЕРЕВОД')
-print(result)
+# result = filter_transactions(transactions)
+# print(result)
 
 
 def count_operations_by_category(transactions: List[Dict[str, Any]], categories: List[str]) -> Dict[str, int]:
     """Функция принимает список словарей с данными о банковских операциях и список категорий операций
     и возвращает словарь, в котором ключи — это названия категорий, а значения — это количество операций
      в каждой категории"""
-    category_count = {category: 0 for category in categories}
+    try:
+        category_count: Dict[str, int] = Counter()
+        for transaction in transactions:
+            description = transaction.get("description", "")
+            for category in categories:
+                if re.search(re.escape(category), description, flags=re.IGNORECASE):
+                    category_count[category] += 1
+            # print(category_count)
+        if category_count == {}:
+            print("Нет операций по заданным категориям")
+        return category_count
+    except Exception as e:
+        print(type(e).__name__)
+        return {}
 
-    for transaction in transactions:
-        description = transaction.get("description", "")
-        for category in categories:
-            if re.search(category, description, flags=re.IGNORECASE):
-                category_count[category] += 1
-
-    return category_count
-
-categories = ["Перевод", "Оплата"]
-result = count_operations_by_category(transactions, categories)
-print(result)
+# categories = ["Перевод", "Оплат", "Открыт"]
+# result = count_operations_by_category(transactions, categories)
+# print(result)

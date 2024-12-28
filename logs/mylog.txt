@@ -1,1 +1,1 @@
-my_function, ERROR: TypeError. Inputs: ('71.02', 29.036), {}
+Функция: my_function, результат: 100.056, ок
