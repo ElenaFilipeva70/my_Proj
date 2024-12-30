@@ -2,14 +2,13 @@ import re
 from collections import Counter
 from typing import Any, Dict, List
 
-
 transactions = [
     {
         "id": 939719570,
         "state": "EXECUTED",
         "date": "2018-06-30T02:08:58.425572",
         "operationAmount": {"amount": "9824.07", "currency": {"name": "USD", "code": "USD"}},
-        "description": "Оплата организации",
+        "description": "Перевод организации",
         "from": "Счет 75106830613657916952",
         "to": "Счет 11776614605963066702",
     },
@@ -54,21 +53,23 @@ transactions = [
 
 def filter_transactions(transactions: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     """Функцию принимает список словарей с данными о банковских операциях и строку поиска
-     и возвращает список словарей, у которых в описании есть данная строка"""
+    и возвращает список словарей, у которых в описании есть данная строка"""
     try:
         print("Введите слово, по которому будем фильтровать")
         search_string = str(input().lower())
         pattern = re.compile(re.escape(search_string), flags=re.IGNORECASE)
         filtered_transactions = [
-            transaction for transaction in transactions
-            if 'description' in transaction and pattern.search(transaction['description'])
+            transaction
+            for transaction in transactions
+            if "description" in transaction and pattern.search(transaction["description"])
         ]
         # if len(filtered_transactions) == 0:
         #     print("Нет операций с заданным описанием")
         return filtered_transactions
-    except Exception as e:
+    except Exception as e:  # pragma: nocover
         print(type(e).__name__)
         return []
+
 
 # result = filter_transactions(transactions)
 # print(result)
@@ -84,15 +85,16 @@ def count_operations_by_category(transactions: List[Dict[str, Any]], categories:
             description = transaction.get("description", "")
             for category in categories:
                 if re.search(re.escape(category), description, flags=re.IGNORECASE):
+                    category = transaction["description"]
                     category_count[category] += 1
-            # print(category_count)
         if category_count == {}:
             print("Нет операций по заданным категориям")
         return category_count
-    except Exception as e:
+    except Exception as e:  # pragma: nocover
         print(type(e).__name__)
         return {}
 
-# categories = ["Перевод", "Оплат", "Открыт"]
+
+# categories = ["ПЕРЕВОД", "Открытие", "ОПЛАТА"]
 # result = count_operations_by_category(transactions, categories)
 # print(result)

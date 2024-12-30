@@ -6,7 +6,7 @@ from src.external_api import conversions_get, get_convert_info
 
 @patch("requests.get")
 def test_get_convert_info(mock_get) -> None:
-    """Проверяем корректное завершение обработки запроса к внешнему API"""
+    """Проверяем завершение обработки запроса к внешнему API"""
     mock_get.return_value.status_code = 200
     mock_get.return_value.json.return_value = {"amount": 8221.37, "rate": 104.007477, "result": 855083.951183}
     assert get_convert_info(8221.37, "USD") == {"amount": 8221.37, "rate": 104.007477, "result": 855083.951183}

@@ -25,5 +25,4 @@ def sort_by_date(dictionary_operation: List[Dict[str, Any]], revers: bool = True
         if string_date_format != "Неверный формат данных":
             new_dictionary_operation.append(operation)
     result_dictionary = sorted(new_dictionary_operation, key=lambda x: x["date"], reverse=revers)
-    # print(result_dictionary)
     return result_dictionary

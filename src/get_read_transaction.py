@@ -1,4 +1,3 @@
-# import os
 from typing import Any, Dict, List
 
 import pandas as pd
@@ -26,6 +25,7 @@ def get_read_excel(path_file_excel: str) -> List[Dict[str, Any]]:
         return []
     dict_read_excel = df_xls.to_dict(orient="records")
     return dict_read_excel
+
 
 # base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # path_file_csv = os.path.join(base_dir, "data", "transactions.csv")

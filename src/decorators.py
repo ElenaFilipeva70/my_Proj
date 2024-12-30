@@ -40,8 +40,8 @@ base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 path_file = os.path.join(base_dir, "logs", "mylog.txt")
 
 
-@log(filename=path_file)
-def my_function(x: int | float, y: int | float) -> int | float:
-    return x + y
+# @log(filename=path_file)
+# def my_function(x: int | float, y: int | float) -> int | float:
+#     return x + y
 
 # my_function(71.02, 29.036)

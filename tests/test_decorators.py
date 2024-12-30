@@ -1,3 +1,5 @@
+from _pytest.capture import CaptureFixture
+
 from src.decorators import log
 
 
@@ -20,7 +22,7 @@ def test_decorators_log_file() -> None:
     assert result == "Функция: my_function, результат: 12, ок\n"
 
 
-def test_decorators_log_consol(capsys) -> None:
+def test_decorators_log_consol(capsys: CaptureFixture[str]) -> None:
     """Тестируем вывод в консоль после успешного выполнения"""
 
     @log()
@@ -41,7 +43,7 @@ def test_decorators_log_invalid_file() -> None:
     assert result == "my_function, ERROR: TypeError. Inputs: ('71.02', 29.036), {}\n"
 
 
-def test_decorators_log_invalid_consol(capsys) -> None:
+def test_decorators_log_invalid_consol(capsys: CaptureFixture[str]) -> None:
     """Тестируем вывод в консоль при ошибке"""
 
     @log()

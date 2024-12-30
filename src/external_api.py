@@ -12,7 +12,7 @@ print(API_KEY)
 print(Base_URL)
 
 
-def conversions_get(transactions_list: dict[str, Any]) -> Optional[float | None]:
+def conversions_get(transactions_list: dict[str, Any]) -> Optional[Any | None]:
     """Функция, которая принимает на вход транзакцию и возвращает сумму транзакции в рублях"""
     try:
         amount = float(transactions_list["operationAmount"]["amount"])

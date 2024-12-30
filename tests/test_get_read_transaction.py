@@ -25,23 +25,23 @@ def test_get_read_excel(mock_read_excel) -> None:
 
 def test_get_read_csv_empty() -> None:
     """Проверяем работу функции, если файл пустой"""
-    result = get_read_csv("../data/orders.csv")
+    result = get_read_csv("data/orders.csv")
     assert result == []
 
 
 def test_get_read_excel_empty() -> None:
     """Проверяем работу функции, если файл пустой"""
-    result = get_read_excel("../data/orders_empty.xlsx")
+    result = get_read_excel("data/orders_empty.xlsx")
     assert result == []
 
 
 def test_get_read_csv_not_found() -> None:
     """Проверяем работу функции, если файл не найден"""
-    result = get_read_csv("../data/orders1.csv")
+    result = get_read_csv("data/orders1.csv")
     assert result == []
 
 
 def test_get_read_excel_not_found() -> None:
     """Проверяем работу функции, если файл не найден"""
-    result = get_read_excel("../data/orders_empty1.xlsx")
+    result = get_read_excel("data/orders_empty1.xlsx")
     assert result == []

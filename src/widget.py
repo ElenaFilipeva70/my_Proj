@@ -45,5 +45,6 @@ def get_date(string_date: str) -> str:
     else:
         return "Неверный формат данных"
 
+
 # new_string_date = get_date("2019/07/03T18:35:29.512364")
 # print("Дата", new_string_date)

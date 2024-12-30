@@ -1,6 +1,7 @@
 import json
 import logging
 import os
+
 # import random
 from typing import Any, Dict, List
 
@@ -26,7 +27,6 @@ def transactions_read(path_file: str) -> List[Dict[str, Any]]:
         with open(path_file, "r", encoding="utf-8") as json_file:
             transactions_list = json.load(json_file)
             logger.debug("Успешное преобразование JSON-файла")
-            # print(transactions_list)
             return list(transactions_list)
     except Exception as e:
         print(type(e).__name__)
@@ -34,6 +34,7 @@ def transactions_read(path_file: str) -> List[Dict[str, Any]]:
         return []
     finally:
         logger.info("Функция завершила работу")
+
 
 # def get_random_number(x: int, y: int) -> int:
 #     random_number = random.randint(x, y)

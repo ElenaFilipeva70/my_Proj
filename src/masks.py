@@ -1,5 +1,5 @@
-import os
 import logging
+import os
 from typing import Union
 
 base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -32,7 +32,7 @@ def get_mask_card_number(card_number: Union[str | int]) -> str:
         else:
             card_number_logger.warning("Неверный формат номера карты")
             return "Неверный формат номера карты"
-    except Exception as e:
+    except Exception as e:  # pragma: nocover
         print(type(e).__name__)
         card_number_logger.error(f"Возникла ошибка {e}", exc_info=True)
         return f"Возникла ошибка {e}"
@@ -53,12 +53,13 @@ def get_mask_account(num_check: Union[str | int]) -> str:
         else:
             account_logger.warning("Неверный формат номера счета")
             return "Неверный формат номера счета"
-    except Exception as e:
+    except Exception as e:  # pragma: nocover
         print(type(e).__name__)
         account_logger.error(f"Возникла ошибка {e}", exc_info=True)
         return f"Возникла ошибка {e}"
     finally:
         account_logger.info("Функция маскировки номера банковского счета завершила работ")
+
 
 # card_number = 7000792289606361
 # mask_card_number = get_mask_card_number(card_number)

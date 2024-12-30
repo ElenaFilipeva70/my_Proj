@@ -102,5 +102,6 @@ def card_number_generator(start: int, stop: int) -> Any:
             number_card = list(card_number_code[x * 4: (x + 1) * 4] for x in range(4))
             yield " ".join(number_card)
 
+
 # for card_number in card_number_generator(1, 5):
 # print(card_number)
