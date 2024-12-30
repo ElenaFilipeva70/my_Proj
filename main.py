@@ -18,7 +18,7 @@ def main() -> Any:
     printed_transaction(result_list)
 
 
-# main()
+main()
 
 # name_card = "Visa Platinum 8990 9221 1366 5229"
 # name_card_mask = mask_account_card(name_card)

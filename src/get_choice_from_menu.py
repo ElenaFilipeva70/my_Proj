@@ -41,10 +41,6 @@ def choice_of_option() -> List[Dict[str, Any]]:
             )
 
 
-# result_list = choice_of_option()
-# print(result_list)
-
-
 def choice_state(result_list: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     """Выбор статуса транзакции для фильтрации"""
     while True:

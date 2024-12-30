@@ -56,8 +56,6 @@ def choice_currency(result_list: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
 
 def choice_filter(result_list: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     """Выбор описания операции транзакции для сортировки"""
-    # pattern_answer_yes = re.compile(r'^[дy]\D*', flags=re.IGNORECASE)
-    # pattern_answer_no = re.compile(r'^[нn]\D*', flags=re.IGNORECASE)
     while True:
         if not result_list:
             return result_list

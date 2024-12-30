@@ -9,7 +9,6 @@ from typing import Any, Dict, List
 
 
 base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-# path_file = os.path.join(base_dir, "data", "operations_test.json")
 path1_file = os.path.join(base_dir, "logs", "utils.log")
 
 logger = logging.getLogger(__name__)
@@ -40,13 +39,11 @@ def transactions_read(path_file: str) -> List[Dict[str, Any]]:
 #     random_number = random.randint(x, y)
 #     return random_number
 
-# path_file = "../data/operations.json"
-# transactions_list = transactions_read(path_file)
 
+# transactions_list = transactions_read(path_file)
 # random_number = get_random_number(0, len(transactions_list)-1)
 # transact = transactions_list[random_number]
 # print(transact)
-
 # if transactions_list:
 #     result_amount = conversions_get(transactions_list[1])
 #     print(result_amount)

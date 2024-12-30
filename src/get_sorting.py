@@ -66,13 +66,9 @@ def filter_transactions(transactions: List[Dict[str, Any]]) -> List[Dict[str, An
         # if len(filtered_transactions) == 0:
         #     print("Нет операций с заданным описанием")
         return filtered_transactions
-    except Exception as e:  # pragma: nocover
+    except Exception as e:
         print(type(e).__name__)
         return []
-
-
-# result = filter_transactions(transactions)
-# print(result)
 
 
 def count_operations_by_category(transactions: List[Dict[str, Any]], categories: List[str]) -> Dict[str, int]:
@@ -90,11 +86,6 @@ def count_operations_by_category(transactions: List[Dict[str, Any]], categories:
         if category_count == {}:
             print("Нет операций по заданным категориям")
         return category_count
-    except Exception as e:  # pragma: nocover
+    except Exception as e:
         print(type(e).__name__)
         return {}
-
-
-# categories = ["ПЕРЕВОД", "Открытие", "ОПЛАТА"]
-# result = count_operations_by_category(transactions, categories)
-# print(result)
