@@ -29,14 +29,9 @@ def get_date(string_date: str) -> str:
     """Функция возвращает строку с датой в формате ДД.ММ.ГГГГ"""
     string_date = string_date.replace(" ", "")
     if "T" in string_date:
-        index_date = string_date.index("T")
-        if index_date > 1:
-            new_string_date = string_date[:index_date]
-        else:
-            new_string_date = string_date[: index_date + 1]
+        new_string_date = string_date.split("T")[0]
     else:
         return "Неверный формат данных"
-    # new_string_date = string_date[8:10] + "." + string_date[5:7] + "." + string_date[0:4]
     new_date = ""
     if len(new_string_date) == 10:
         for number in new_string_date:
@@ -45,8 +40,7 @@ def get_date(string_date: str) -> str:
             else:
                 number = "-"
                 new_date += number
-        splited_string_date = new_date.split("-")
-        formated_string_date = ".".join(splited_string_date[-1::-1])
-        return formated_string_date
+        year, month, day = new_date.split("-")
+        return f"{day}.{month}.{year}"
     else:
         return "Неверный формат данных"

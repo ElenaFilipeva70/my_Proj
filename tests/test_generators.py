@@ -12,7 +12,7 @@ def test_filter_by_currency(my_transactions: List[Dict[str, Any]]) -> None:
         "state": "EXECUTED",
         "date": "2018-06-30T02:08:58.425572",
         "operationAmount": {"amount": "9824.07", "currency": {"name": "USD", "code": "USD"}},
-        "description": "Перевод организации",
+        "description": "Оплата организации",
         "from": "Счет 75106830613657916952",
         "to": "Счет 11776614605963066702",
     }
@@ -44,7 +44,7 @@ def test_filter_by_currency_invalid(my_transactions_invalid: List[Dict[str, Any]
 
 def test_transaction_descriptions(my_transactions: List[Dict[str, Any]]) -> None:
     generator = transaction_descriptions(my_transactions)
-    assert next(generator) == "Перевод организации"
+    assert next(generator) == "Оплата организации"
     assert next(generator) == "Перевод со счета на счет"
     assert next(generator) == "Перевод со счета на счет"
     assert next(generator) == "Перевод с карты на карту"

@@ -10,6 +10,8 @@ def filter_by_state(dictionary_operation: List[Dict[str, Any]], state: str = "EX
     for operation in dictionary_operation:
         if operation.get("state") == state:
             result_dictionary.append(operation)
+    # if result_dictionary == []:
+    #    print("Операций с выбранным статусом не найдено")
     return result_dictionary
 
 

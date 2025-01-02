@@ -1,13 +1,18 @@
 import json
 import logging
 import os
+
 # import random
 from typing import Any, Dict, List
 
-from src.external_api import conversions_get
+# from src.external_api import conversions_get
+
+
+base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+path1_file = os.path.join(base_dir, "logs", "utils.log")
 
 logger = logging.getLogger(__name__)
-file_handler = logging.FileHandler("logs/utils.log", "w", encoding="utf-8")
+file_handler = logging.FileHandler(path1_file, "w", encoding="utf-8")
 file_formatter = logging.Formatter("%(asctime)s %(filename)s %(levelname)s: %(message)s")
 file_handler.setFormatter(file_formatter)
 logger.addHandler(file_handler)
@@ -35,14 +40,10 @@ def transactions_read(path_file: str) -> List[Dict[str, Any]]:
 #     return random_number
 
 
-base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-path_file = os.path.join(base_dir, "data", "operations_test1.json")
-# path_file = "../data/operations.json"
-transactions_list = transactions_read(path_file)
-
+# transactions_list = transactions_read(path_file)
 # random_number = get_random_number(0, len(transactions_list)-1)
 # transact = transactions_list[random_number]
 # print(transact)
-if transactions_list:
-    result_amount = conversions_get(transactions_list[1])
-    print(result_amount)
+# if transactions_list:
+#     result_amount = conversions_get(transactions_list[1])
+#     print(result_amount)
